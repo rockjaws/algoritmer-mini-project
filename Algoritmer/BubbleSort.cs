@@ -4,6 +4,8 @@ public class BubbleSort
 {
   public static T[] Sort<T>(T[] arr) where T : IComparable<T>
   {
+        if (arr.Length == 0) throw new Exception("Invalid operation. Provided list must contain at least one element.");
+        if (arr.Length == 1) return arr;
     for (int i = 1; i < arr.Length; i++)
     {
       T val = arr[i];

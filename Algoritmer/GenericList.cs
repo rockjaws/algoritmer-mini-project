@@ -6,7 +6,7 @@ namespace Algoritmer
 {
     public class GenericList<T> : IEnumerable<T>
     {
-        T[] TheList { get; set; } = new T[] {};
+        public T[] TheList { get; set; } = new T[] {};
 
         public GenericList(T[] values) 
         {
