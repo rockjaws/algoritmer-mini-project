@@ -6,21 +6,21 @@ public class QuickSortAlgorithm<T> where T : IComparable<T>
   {
     if (arr.Length <= 1) return arr;
 
-    int pivot = arr[0];
+    T pivot = arr[0];
     int beforeSize = 0;
     for (int i = 0; i < arr.Length; i++)
     {
-      if (arr[i] < pivot) beforeSize++;
+      if (arr[i].CompareTo(pivot) < 0) beforeSize++;
     }
-    int[] before = new int[beforeSize];
+    T[] before = new T[beforeSize];
     int beforeCounter = 0;
 
-    int[] after = new int[arr.Length - beforeSize - 1];
+    T[] after = new T[arr.Length - beforeSize - 1];
     int afterCounter = 0;
 
     for (int i = 1; i < arr.Length; i++)
     {
-      if (arr[i] < pivot)
+      if (arr[i].CompareTo(pivot) < 0)
       {
         before[beforeCounter] = arr[i];
         beforeCounter++;
@@ -32,7 +32,7 @@ public class QuickSortAlgorithm<T> where T : IComparable<T>
       }
     }
 
-    int[] tmpArr = new int[arr.Length];
+    T[] tmpArr = new T[arr.Length];
     QuickSort(before).CopyTo(tmpArr, 0);
     tmpArr[before.Length] = pivot;
     QuickSort(after).CopyTo(tmpArr, before.Length + 1);
