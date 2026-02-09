@@ -1,10 +1,16 @@
 ﻿namespace Algoritmer
 {
-    internal class Program
+  internal class Program
+  {
+    static void Main()
     {
-        static void Main(string[] args)
-        {
-          
-        }
+      var dataService = new DataService<int>();
+      int[] values = dataService.LoadData("notSorted.json");
+      values = BubbleSort.Sort(values);
+      foreach (var i in values)
+      {
+        Console.WriteLine(i);
+      }
     }
+  }
 }

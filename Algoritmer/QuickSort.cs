@@ -1,8 +1,8 @@
 ﻿namespace Algoritmer;
 
-public class QuickSortAlgorithm<T> where T : IComparable<T>
+public class QuickSort
 {
-  public T[] QuickSort(T[] arr)
+  public static T[] Sort<T>(T[] arr) where T : IComparable<T>
   {
     if (arr.Length <= 1) return arr;
 
@@ -33,9 +33,9 @@ public class QuickSortAlgorithm<T> where T : IComparable<T>
     }
 
     T[] tmpArr = new T[arr.Length];
-    QuickSort(before).CopyTo(tmpArr, 0);
+    Sort(before).CopyTo(tmpArr, 0);
     tmpArr[before.Length] = pivot;
-    QuickSort(after).CopyTo(tmpArr, before.Length + 1);
+    Sort(after).CopyTo(tmpArr, before.Length + 1);
     return tmpArr;
   }
 }
