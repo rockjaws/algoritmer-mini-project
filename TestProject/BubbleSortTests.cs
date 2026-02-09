@@ -13,7 +13,6 @@ namespace TestProject
         {
             GenericList<int> genericListClass = new GenericList<int>();
             int[] list = genericListClass.TheList;
-
             Assert.Throws<Exception>(() => BubbleSort.Sort(list));
             
         }
