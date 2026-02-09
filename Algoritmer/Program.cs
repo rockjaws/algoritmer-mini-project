@@ -7,12 +7,17 @@
       var dataService = new DataService<int>();
       int[] values = dataService.LoadData("notSorted.json");
       int[] values2 = (int[])values.Clone();
-      int comparisons = 0;
-      values = BubbleSort.Sort(values, ref comparisons);
-      Console.WriteLine($"Bubble sort comparisons: {comparisons}");
-      comparisons = 0;
-      values2 = QuickSort.Sort(values2, ref comparisons);
-      Console.WriteLine($"Quick sort comparisons: {comparisons}");
+
+      values = BubbleSort.Sort(values);
+      Console.WriteLine($"Bubble sort comparisons: {BubbleSort.Comparisons}");
+
+      values2 = QuickSort.Sort(values2);
+      Console.WriteLine($"Quick sort comparisons: {QuickSort.Comparisons}");
+
+      Console.WriteLine("Test");
+      int[] test_values = new int[] { };
+      QuickSort.Sort(test_values);
+
       dataService.SaveData(values, "BubbleSort_notSorted.json");
       dataService.SaveData(values2, "QuickSort_notSorted.json");
     }
