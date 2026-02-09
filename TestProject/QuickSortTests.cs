@@ -11,10 +11,11 @@ namespace TestProject
         [TestMethod]
         public void EmptyQuickSort()
         {
-            GenericList<int> genericListClass = new GenericList<int>();
-            int[] list = genericListClass.TheList;
+            int[] input = Array.Empty<int>();
 
-            Assert.Throws<Exception>(() => QuickSort.Sort(list));
+            int[] result = QuickSort.Sort(input);
+
+            Assert.IsEmpty(result);
         }
 
         [TestMethod]
@@ -38,12 +39,14 @@ namespace TestProject
             {
                 5, 2, 5, 7, 7
             };
+
             GenericList<int> listClass = new GenericList<int>(list);
-            QuickSort.Sort(listClass.TheList);
+           listClass.TheList = QuickSort.Sort(listClass.TheList);
             int[] sortedList = [2, 5, 5, 7, 7];
 
             bool result = sortedList.SequenceEqual(listClass.TheList);
-            Assert.IsTrue(result);
+            CollectionAssert.AreEqual(sortedList, listClass.TheList);
+
 
         }
 

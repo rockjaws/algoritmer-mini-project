@@ -17,7 +17,7 @@ public class BubbleSort
       for (int i = 1; i < arr.Length - pass; i++)
       {
         comparisons++;
-        if (arr[i - 1].CompareTo(arr[i]) < 0)
+        if (arr[i - 1].CompareTo(arr[i]) > 0)
         {
           T tmp = arr[i - 1];
           arr[i - 1] = arr[i];
