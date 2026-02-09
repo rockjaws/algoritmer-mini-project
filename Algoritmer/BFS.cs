@@ -5,55 +5,9 @@ using System.Text;
 
 namespace Algoritmer
 {
-  public class BFS<T>
-  {
-    public int Comparisons { get; private set; } = 0;
-
-    public void BFSRoute(Graph<T> graph, Node<T> source)
+    public class BFS<T>
     {
-      Comparisons = 0;
-
-      List<Node<T>> exitToSource = new List<Node<T>>();
-      List<Node<T>> marked = new List<Node<T>>();
-      Dictionary<Node<T>, Node<T>> parent = new Dictionary<Node<T>, Node<T>>();
-      Queue<Node<T>> queue = new Queue<Node<T>>();
-
-      queue.Enqueue(source);
-      parent[source] = null;
-
-      Console.WriteLine("Starting BFS...");
-      while (queue.Count > 0)
-      {
-        Node<T> node = queue.Dequeue();
-
-        Comparisons++;
-        if (marked.Contains(node))
-          continue;
-
-        Comparisons++;
-        if (node.Edges.Count == 1)
-        {
-          Console.WriteLine();
-          Console.WriteLine($"End node found: {node.Data}");
-          exitToSource.Add(node);
-        }
-        foreach (var edge in node.Edges)
-        {
-          Comparisons++;
-          if (!parent.ContainsKey(edge.To))
-          {
-            parent[edge.To] = node;
-            queue.Enqueue(edge.To);
-          }
-        }
-        marked.Add(node);
-      }
-
-
-      foreach (var exit in exitToSource)
-      {
-        Console.WriteLine();
-        Console.WriteLine("Path:");
+        public int Comparisons { get; private set; } = 0;
 
         public void BFSRoute(Graph<T> graph, Node<T> source, Node<T> destination)
         {
@@ -75,7 +29,7 @@ namespace Algoritmer
                 if (marked.Contains(node))
                     continue;
 
-                if (node == destination)
+                if (node.Equals(destination))
                 {
                     Console.WriteLine();
                     Console.WriteLine($"End node found: {node.Data}");
@@ -118,19 +72,5 @@ namespace Algoritmer
             Comparisons = marked.Count;
             Console.WriteLine($"\nBFS total comparisons: {Comparisons}");
         }
-
-        path.Reverse();
-
-        foreach (var node in path)
-        {
-          Console.WriteLine(node.Data);
-        }
-      }
-
-
     }
-
-
-
-  }
 }
