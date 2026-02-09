@@ -12,7 +12,6 @@ namespace TestProject
         public void EmptyBubbleSort()
         {
             GenericList<int> emptyList = new GenericList<int>();
-            BubbleSortAlgorithm<int> bubbleSort = new BubbleSortAlgorithm<int>();
 
             
         }
