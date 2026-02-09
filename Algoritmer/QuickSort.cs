@@ -2,13 +2,13 @@
 
 public class QuickSort
 {
-  public static T[] Sort<T>(T[] arr) where T : IComparable<T>
+  public static T[] Sort<T>(T[] arr, ref int comparisons) where T : IComparable<T>
   {
     if (arr.Length <= 1) return arr;
 
     T pivot = arr[0];
     int beforeSize = 0;
-    for (int i = 0; i < arr.Length; i++)
+    for (int i = 1; i < arr.Length; i++)
     {
       if (arr[i].CompareTo(pivot) < 0) beforeSize++;
     }
@@ -20,6 +20,7 @@ public class QuickSort
 
     for (int i = 1; i < arr.Length; i++)
     {
+      comparisons++;
       if (arr[i].CompareTo(pivot) < 0)
       {
         before[beforeCounter] = arr[i];
@@ -33,9 +34,9 @@ public class QuickSort
     }
 
     T[] tmpArr = new T[arr.Length];
-    Sort(before).CopyTo(tmpArr, 0);
+    Sort(before, ref comparisons).CopyTo(tmpArr, 0);
     tmpArr[before.Length] = pivot;
-    Sort(after).CopyTo(tmpArr, before.Length + 1);
+    Sort(after, ref comparisons).CopyTo(tmpArr, before.Length + 1);
     return tmpArr;
   }
 }
