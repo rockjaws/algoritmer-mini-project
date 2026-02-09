@@ -1,8 +1,8 @@
 ﻿namespace Algoritmer;
 
-public class BubbleSortAlgorithm<T> where T : IComparable<T>
+public class BubbleSort
 {
-  public T[] BubbleSort(T[] arr)
+  public static T[] Sort<T>(T[] arr) where T : IComparable<T>
   {
     for (int i = 1; i < arr.Length; i++)
     {
