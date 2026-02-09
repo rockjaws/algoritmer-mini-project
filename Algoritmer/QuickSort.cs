@@ -4,9 +4,10 @@ public class QuickSort
 {
   public static T[] Sort<T>(T[] arr, ref int comparisons) where T : IComparable<T>
   {
-    if (arr.Length <= 1) return arr;
+        if (arr.Length == 0) throw new Exception("Invalid operation. Provided list must contain at least one element.");
+        if (arr.Length == 1) return arr;
 
-    T pivot = arr[0];
+        T pivot = arr[0];
     int beforeSize = 0;
     for (int i = 1; i < arr.Length; i++)
     {

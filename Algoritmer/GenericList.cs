@@ -4,14 +4,17 @@ using System.Text;
 
 namespace Algoritmer
 {
-    public class GenericList<T>
+    public class GenericList<T> : IEnumerable<T>
     {
-        T[] TheList { get; set; } = new T[] {};
+        public T[] TheList { get; set; } = new T[] {};
 
         public GenericList(T[] values) 
         {
             TheList = values;
         }
+
+        // Empty ctor for unit testing purposes.
+        public GenericList() { }
 
         public void Add(T value)
         {
@@ -33,6 +36,11 @@ namespace Algoritmer
             {
                 yield return item;
             }
+        }
+
+        System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
+        {
+            return GetEnumerator();
         }
     }
 }
