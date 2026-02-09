@@ -2,7 +2,7 @@
   "algorithm": "QuickSort",
   "dataset": "notSorted.json",
   "comparisons": 550,
-  "time": "0ms",
+  "time": "1ms",
   "sorted": [
     1,
     2,

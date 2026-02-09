@@ -55,9 +55,12 @@ namespace Algoritmer
             graph.AddEdge("3D Cinema", "Pirate Ship");
             graph.AddEdge("Funhouse", "3D Cinema");
 
-            BFS<string> bFS = new BFS<string>();
-            bFS.BFSRoute(graph, graph.FindNode("Entrance"));
-    }
+            //BFS<string> bFS = new BFS<string>();
+            //bFS.BFSRoute(graph, graph.FindNode("Entrance"), graph.FindNode("Rollercoaster"));
+
+            DFS<string> dFS = new DFS<string>();
+            dFS.DFSRoute(graph, graph.FindNode("Entrance"), graph.FindNode("Rollercoaster"));
+        }
 
     static void ProcessFile(string fileName, DataService<int> dataService)
     {

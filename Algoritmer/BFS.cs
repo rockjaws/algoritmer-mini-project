@@ -9,7 +9,7 @@ namespace Algoritmer
     {
         public int Comparisons { get; private set; } = 0;
 
-        public void BFSRoute(Graph<T> graph, Node<T> source)
+        public void BFSRoute(Graph<T> graph, Node<T> source, Node<T> destination)
         {
             Comparisons = 0;
 
@@ -26,20 +26,18 @@ namespace Algoritmer
             {
                 Node<T> node = queue.Dequeue();
 
-                Comparisons++;
                 if (marked.Contains(node))
                     continue;
 
-                Comparisons++;
-                if (node.Edges.Count == 1)
+                if (node == destination)
                 {
                     Console.WriteLine();
                     Console.WriteLine($"End node found: {node.Data}");
                     exitToSource.Add(node);
+                    break;
                 }
                 foreach (var edge in node.Edges)
                 {
-                    Comparisons++;
                     if (!parent.ContainsKey(edge.To))
                     {
                         parent[edge.To] = node;
@@ -71,9 +69,10 @@ namespace Algoritmer
                     Console.WriteLine(node.Data);
                 }
             }
-
+            Comparisons = marked.Count;
             Console.WriteLine($"\nBFS total comparisons: {Comparisons}");
         }
+
 
 
 
