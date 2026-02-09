@@ -1,26 +1,16 @@
-﻿namespace Algoritmer
+﻿using System.Diagnostics;
+
+namespace Algoritmer
 {
   internal class Program
   {
     static void Main()
     {
-            //var dataService = new DataService<int>();
-            //int[] values = dataService.LoadData("notSorted.json");
-            //int[] values2 = (int[])values.Clone();
-
-            //values = BubbleSort.Sort(values);
-            //Console.WriteLine($"Bubble sort comparisons: {BubbleSort.Comparisons}");
-
-            //values2 = QuickSort.Sort(values2);
-            //Console.WriteLine($"Quick sort comparisons: {QuickSort.Comparisons}");
-
-            //Console.WriteLine("Test");
-            //int[] test_values = new int[] { };
-            //QuickSort.Sort(test_values);
-
-            //dataService.SaveData(values, "BubbleSort_notSorted.json");
-            //dataService.SaveData(values2, "QuickSort_notSorted.json");
-
+      var dataService = new DataService<int>();
+      ProcessFile("notSorted.json", dataService);
+      ProcessFile("reverseSorted.json", dataService);
+      
+      
             Graph<string> graph = new Graph<string>();
             graph.AddNode("Entrance");
             graph.AddNode("Slot Machines");
@@ -67,6 +57,43 @@
 
             BFS<string> bFS = new BFS<string>();
             bFS.BFSRoute(graph, graph.FindNode("Entrance"));
-        }
+    }
+
+    static void ProcessFile(string fileName, DataService<int> dataService)
+    {
+      int[] values = dataService.LoadData(fileName);
+
+      Stopwatch sw = Stopwatch.StartNew();
+      int[] bubbles = BubbleSort.Sort(values.ToArray()); // Use ToArray to pass fresh copy of values
+      sw.Stop();
+      long bubbleMs = sw.ElapsedMilliseconds;
+
+      var bubbleObject = new
+      {
+        algorithm = "BubbleSort",
+        dataset = fileName,
+        comparisons = BubbleSort.Comparisons,
+        time = $"{bubbleMs}ms",
+        sorted = bubbles
+      };
+      dataService.SaveData(bubbleObject, $"BubbleSort_{fileName}");
+
+      QuickSort.ResetComparisons(); // QuickSort is recursive so reset counter to 0 before each run
+
+      sw.Restart();
+      int[] quickie = QuickSort.Sort(values.ToArray()); // Use ToArray to pass fresh copy of values
+      sw.Stop();
+      long quickieMs = sw.ElapsedMilliseconds;
+
+      var quickieObject = new
+      {
+        algorithm = "QuickSort",
+        dataset = fileName,
+        comparisons = QuickSort.Comparisons,
+        time = $"{quickieMs}ms",
+        sorted = quickie
+      };
+      dataService.SaveData(quickieObject, $"QuickSort_{fileName}");
+    }
   }
 }
