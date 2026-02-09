@@ -25,14 +25,13 @@ public class DataService<T>
     return numbers;
   }
 
-  public void SaveData(T[] arr, string FileName)
+  public void SaveData<TData>(TData jsonObject, string fileName)
   {
     string projectRoot = Path.GetFullPath(Path.Combine(AppContext.BaseDirectory, "..", "..", ".."));
     string outputDir = Path.Combine(projectRoot, "output");
     Directory.CreateDirectory(outputDir);
-    string outputFile = Path.Combine(outputDir, FileName);
-    var outputData = new { values = arr };
-    string newJson = JsonSerializer.Serialize(outputData, new JsonSerializerOptions { WriteIndented = true });
+    string outputFile = Path.Combine(outputDir, fileName);
+    string newJson = JsonSerializer.Serialize(jsonObject, new JsonSerializerOptions { WriteIndented = true });
     File.WriteAllText(outputFile, newJson);
     Console.WriteLine($"Saved JSON to: {outputFile}");
   }

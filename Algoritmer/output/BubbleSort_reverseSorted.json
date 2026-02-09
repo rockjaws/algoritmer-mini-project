@@ -1,5 +1,9 @@
 {
-  "values": [
+  "algorithm": "BubbleSort",
+  "dataset": "reverseSorted.json",
+  "comparisons": 4950,
+  "time": "0ms",
+  "sorted": [
     1,
     2,
     3,

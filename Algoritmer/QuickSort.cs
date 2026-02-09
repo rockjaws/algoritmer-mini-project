@@ -42,4 +42,9 @@ public class QuickSort
     Sort(after).CopyTo(tmpArr, before.Length + 1);
     return tmpArr;
   }
+
+  public static void ResetComparisons()
+  {
+    comparisons = 0;
+  }
 }
