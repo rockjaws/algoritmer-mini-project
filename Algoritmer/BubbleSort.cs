@@ -2,21 +2,25 @@
 
 public class BubbleSort
 {
-  public static T[] Sort<T>(T[] arr) where T : IComparable<T>
+  public static T[] Sort<T>(T[] arr, ref int comparisons) where T : IComparable<T>
   {
         if (arr.Length == 0) throw new Exception("Invalid operation. Provided list must contain at least one element.");
         if (arr.Length == 1) return arr;
-    for (int i = 1; i < arr.Length; i++)
+    for (int pass = 0; pass < arr.Length - 1; pass++)
     {
-      T val = arr[i];
-      int pointer = i;
-
-      while (pointer > 0 && val.CompareTo(arr[pointer - 1]) < 0)
+      bool swapped = false;
+      for (int i = 1; i < arr.Length - pass; i++)
       {
-        arr[pointer] = arr[pointer - 1];
-        pointer--;
+        comparisons++;
+        if (arr[i - 1].CompareTo(arr[i]) < 0)
+        {
+          T tmp = arr[i - 1];
+          arr[i - 1] = arr[i];
+          arr[i] = tmp;
+          swapped = true;
+        }
       }
-      arr[pointer] = val;
+      if (!swapped) break;
     }
     return arr;
   }
