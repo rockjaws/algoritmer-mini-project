@@ -21,10 +21,12 @@ namespace Algoritmer
             queue.Enqueue(source);
             parent[source] = null;
 
+            Console.WriteLine();
             Console.WriteLine("Starting BFS...");
             while (queue.Count > 0)
             {
                 Node<T> node = queue.Dequeue();
+                Console.WriteLine(node.Data);
 
                 if (marked.Contains(node))
                     continue;
@@ -32,7 +34,7 @@ namespace Algoritmer
                 if (node.Equals(destination))
                 {
                     Console.WriteLine();
-                    Console.WriteLine($"End node found: {node.Data}");
+                    Console.WriteLine($"Desitnation found {node.Data}");
                     exitToSource.Add(node);
                     break;
                 }
@@ -51,7 +53,7 @@ namespace Algoritmer
             foreach (var exit in exitToSource)
             {
                 Console.WriteLine();
-                Console.WriteLine("Path:");
+                Console.WriteLine("Path to exit:");
 
                 Node<T> current = exit;
                 List<Node<T>> path = new List<Node<T>>();

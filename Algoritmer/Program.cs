@@ -34,8 +34,8 @@ namespace Algoritmer
       graph.AddEdge("Ice Cream", "Pirate Ship");
 
       BFS<string> bFS = new BFS<string>();
-      bFS.BFSRoute(graph, graph.FindNode("Water Ride"));
-      bFS.BFSRoute(graph, graph.FindNode("Volcano Ride"));
+      bFS.BFSRoute(graph, graph.FindNode("Entrance"), graph.FindNode("Water Ride"));
+      bFS.BFSRoute(graph, graph.FindNode("Entrance"), graph.FindNode("Volcano Ride"));
       DFS<string> dFS = new DFS<string>();
       dFS.DFSRoute(graph, graph.FindNode("Entrance"), graph.FindNode("Water Ride"));
       dFS.DFSRoute(graph, graph.FindNode("Entrance"), graph.FindNode("Volcano Ride"));

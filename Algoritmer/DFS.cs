@@ -18,9 +18,12 @@ namespace Algoritmer
             stack.Push(source);
             parent[source] = null;
 
+            Console.WriteLine();
+            Console.WriteLine("Starting DFS...");
             while (stack.Count > 0)
             {
                 Node<T> node = stack.Pop();
+                Console.WriteLine(node.Data);
 
                 if (marked.Contains(node)) 
                     continue;
@@ -50,7 +53,7 @@ namespace Algoritmer
             foreach (var exit in exitToSource)
             {
                 Console.WriteLine();
-                Console.WriteLine("Path:");
+                Console.WriteLine("Path to exit:");
 
                 Node<T> current = exit;
                 List<Node<T>> path = new List<Node<T>>();
