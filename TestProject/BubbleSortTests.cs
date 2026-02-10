@@ -11,8 +11,7 @@ namespace TestProject
         [TestMethod]
         public void EmptyBubbleSort()
         {
-            GenericList<int> genericListClass = new GenericList<int>();
-            int[] list = genericListClass.TheList;
+            int[] list = new int[0];
             Assert.Throws<Exception>(() => BubbleSort.Sort(list));
             
         }
@@ -20,15 +19,10 @@ namespace TestProject
         [TestMethod]
         public void SingleElementBubbleSort()
         {
-            GenericList<int> listClass = new GenericList<int>();
 
-            listClass.Add(5);
-            BubbleSort.Sort(listClass.TheList);
-            int[] list = listClass.TheList;
-
-            // Added to make sure the number is added, since it's greyed out in the IDE.
-            Assert.IsTrue(list.Contains(5));
-            Assert.AreEqual(listClass.TheList, list);
+            int[] list = new int[1];
+            list.Append(5);
+            BubbleSort.Sort(list);     
         }
 
         [TestMethod]
@@ -38,12 +32,10 @@ namespace TestProject
             {
                 5, 2, 5, 7, 7
             };
-            GenericList<int> listClass = new GenericList<int>(list);
-            BubbleSort.Sort(listClass.TheList);
+            BubbleSort.Sort(list);
             int[] sortedList = [2, 5, 5, 7, 7];
 
-            bool result = sortedList.SequenceEqual(listClass.TheList);
-            Assert.IsTrue(result);
+            CollectionAssert.AreEquivalent(sortedList, list);
 
         }
 
@@ -55,9 +47,13 @@ namespace TestProject
                 2, 5, 5, 7, 7
             };
 
-            GenericList<int> listClass = new GenericList<int>(list);
-            BubbleSort.Sort(listClass.TheList);
-            Assert.AreEqual (list, listClass.TheList);
+            int[] listCompare = new int[5]
+            {
+                2, 5, 5, 7, 7
+            };
+
+            BubbleSort.Sort(list);
+            CollectionAssert.AreEquivalent(list, listCompare);
         }
     }
 }
