@@ -9,6 +9,7 @@ namespace Algoritmer
       var dataService = new DataService<int>();
       ProcessFile("notSorted.json", dataService);
       ProcessFile("reverseSorted.json", dataService);
+      ProcessFile("sorted.json", dataService);
 
 
       Graph<string> graph = new Graph<string>();
