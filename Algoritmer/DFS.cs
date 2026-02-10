@@ -42,8 +42,7 @@ namespace Algoritmer
                     {
                         if (!parent.ContainsKey(edge.To))
                         {
-                        parent[edge.To] = node;
-                        
+                        parent[edge.To] = node; 
                         }
                         stack.Push(edge.To);
                     
