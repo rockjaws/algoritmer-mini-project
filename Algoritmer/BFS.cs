@@ -71,7 +71,7 @@ namespace Algoritmer
           Console.Write(path[i].Data);
           if (i + 1 != path.Count)
           {
-            Console.Write(" → ");
+            Console.Write(" -> ");
           }
         }
       }
