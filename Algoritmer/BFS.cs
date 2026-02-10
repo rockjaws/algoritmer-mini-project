@@ -5,34 +5,57 @@ using System.Text;
 
 namespace Algoritmer
 {
+  /// <summary>
+  /// Implements Breadth-First Search (BFS) algorithm for graph traversal.
+  /// BFS explores nodes level by level, visiting all neighbors before moving deeper.
+  /// Time Complexity: O(V + E) where V is vertices and E is edges
+  /// Space Complexity: O(V) for the queue and tracking structures
+  /// </summary>
+  /// <typeparam name="T">The type of data stored in graph nodes.</typeparam>
   public class BFS<T>
   {
+    /// <summary>
+    /// Gets the number of nodes visited during the last BFS operation.
+    /// </summary>
     public int Comparisons { get; private set; } = 0;
 
+    /// <summary>
+    /// Finds a path from source to destination node using Breadth-First Search.
+    /// BFS guarantees the shortest path in an unweighted graph.
+    /// </summary>
+    /// <param name="graph">The graph to search.</param>
+    /// <param name="source">The starting node.</param>
+    /// <param name="destination">The target node to find.</param>
     public void BFSRoute(Graph<T> graph, Node<T> source, Node<T> destination)
     {
       Comparisons = 0;
 
       List<Node<T>> exitToSource = new List<Node<T>>();
-      List<Node<T>> marked = new List<Node<T>>();
-      Dictionary<Node<T>, Node<T>> parent = new Dictionary<Node<T>, Node<T>>();
-      Queue<Node<T>> queue = new Queue<Node<T>>();
+      List<Node<T>> marked = new List<Node<T>>();  // Tracks visited nodes
+      Dictionary<Node<T>, Node<T>> parent = new Dictionary<Node<T>, Node<T>>();  // Tracks path for reconstruction
+      Queue<Node<T>> queue = new Queue<Node<T>>();  // FIFO structure for level-order traversal
 
+      // Initialize: start with source node
       queue.Enqueue(source);
-      parent[source] = null;
+      parent[source] = null;  // Source has no parent
 
       Console.WriteLine();
       Console.WriteLine("Starting BFS...");
       Console.Write("Order of nodes visited: ");
+
+      // Main BFS loop: process nodes level by level
       while (queue.Count > 0)
       {
         Node<T> node = queue.Dequeue();
         Console.Write(node.Data);
 
+        // Skip if already visited (can happen if node is enqueued multiple times)
         if (marked.Contains(node))
           continue;
+
         marked.Add(node);
 
+        // Check if we've reached the destination
         if (node.Equals(destination))
         {
           Console.WriteLine();
@@ -40,30 +63,35 @@ namespace Algoritmer
           exitToSource.Add(node);
           break;
         }
+
         Console.Write(", ");
+
+        // Explore all neighbors of current node
         foreach (var edge in node.Edges)
         {
+          // Only enqueue if not already discovered (parent not set)
           if (!parent.ContainsKey(edge.To))
           {
-            parent[edge.To] = node;
+            parent[edge.To] = node;  // Record parent for path reconstruction
             queue.Enqueue(edge.To);
           }
         }
       }
 
-
+      // Reconstruct and display the path from source to destination
       foreach (var exit in exitToSource)
       {
         Node<T> current = exit;
         List<Node<T>> path = new List<Node<T>>();
 
+        // Backtrack from destination to source using parent pointers
         while (current != null)
         {
           path.Add(current);
           current = parent[current];
         }
 
-        path.Reverse();
+        path.Reverse();  // Reverse to get source → destination order
 
         Console.Write("Path to destination: ");
         for (int i = 0; i < path.Count; i++)
@@ -75,6 +103,7 @@ namespace Algoritmer
           }
         }
       }
+
       Comparisons = marked.Count;
       Console.WriteLine($"\nBFS Visited Nodes: {Comparisons}");
     }
